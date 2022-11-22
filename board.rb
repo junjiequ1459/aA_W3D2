@@ -1,6 +1,8 @@
 require_relative "card"
 
 class Board
+  attr_reader :grid
+
   def initialize
     @grid = Array.new(4) { Array.new(4) { 0 } }
   end
@@ -15,21 +17,27 @@ class Board
     @grid[row][col] = val
   end
 
+  def shuffle
+    counter = 0
+    shuffled = @grid.flatten.shuffle
+    @grid.each_with_index do |ele, i|
+      @grid.each_with_index do |ele, j|
+        @grid[i][j] = shuffled[counter]
+        counter += 1
+      end
+    end
+  end
+
   def populate
     @grid.each_with_index do |row, i|
       row.each_with_index do |e, j|
         if i < @grid.length / 2
           @grid[i][j] = Card.new
-          @grid[i + 2][j] = @grid[i][j]
+          @grid[i + 2][j] = @grid[i][j].dup
         end
       end
     end
-    shuffled = @grid.flatten.shuffle
-    @grid.each_with_index do |row, i|
-      row.each_with_index do |ele, j|
-        @grid[i][j] = shuffled[i + j]
-      end
-    end
+    self.shuffle
   end
 
   def render

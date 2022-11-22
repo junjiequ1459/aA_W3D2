@@ -1,5 +1,5 @@
 class Card
-  attr_reader :face_down, :face_value, :face_down_value
+  attr_reader :face_down_value, :face_down, :face_value
 
   def initialize
     @face_value = ("A".."Z").to_a.sample
@@ -9,19 +9,11 @@ class Card
 
   def hide
     @face_down = true
-  end
-
-  def reveal
-    @face_down = false
-    @face_value
+    @face_down_value
   end
 
   def display
-    if @face_down == false
-      @face_value
-    end
+    @face_down = false
+    @face_value
   end
-
-  #hello
-
 end
