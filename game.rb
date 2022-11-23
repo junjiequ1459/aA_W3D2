@@ -12,18 +12,18 @@ class Game
 
   def first_guess(pos)
     @previous_guess = pos
-    @board.grid[@previous_guess].display
+    @board.grid[@previous_guess[0]][@previous_guess[1]].display
   end
 
   def second_guess(pos)
     @current_guess = pos
     if @current_guess == @previous_guess
-      @board.grid[@current_guess].display
+      @board.grid[@current_guess[0]][@current_guess[1]].display
       current_guess = []
       previous_guess = []
     else
-      @board.grid[@current_guess].hide
-      @board.grid[@current_guess].hide
+      @board.grid[@current_guess[0]][@current_guess[1]].hide
+      @board.grid[@current_guess[0]][@current_guess[1]].hide
       current_guess = []
       previous_guess = []
     end
